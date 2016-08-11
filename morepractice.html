@@ -1,42 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ticket</title>
-</head>
-<body>
-<p id="result"></p>
+  var target;
+  var guess1;
+  var guess2;
+  var finished = false;
 
-<script>
-//    var numbers = ["1", "2", "3", "4"];
-//    var i = 0;
-//    var text = "";
-//    while (numbers[i]) {
-//        text += numbers[i] + "<br>";
-//        i++;
-//    }
-//    document.getElementById("result").innerHTML = text;
-//
-//    function things() {
-//        alert('Hi');
-//        prompt('Do you like pie?');
-//        alert('Cool');
-//    }
-//
-//    things();
+  function game(){
+      var random_num = Math.random() * 100;
+      var random_number_int = Math.floor(random_num);
+      target = random_number_int + 1;
 
+      while (!finished){
+          guess2 = prompt("I am thinking of a random number " +
+                  "that is in the range of 1 to 100 \n\n" + "What is the number that I am thinking of? ");
+          guess1 = parseInt(guess2);
+          finished = check_guess();
+      }
 
-function tellFortune(random_location, random_job, random_spouse, random_kids) {
+  }
 
-    var fortune = 'You will live in ' + random_location + ' as a ' + random_job + ' and married to ' + random_spouse + ' ' + 'with ' + random_kids + ' kids.';
-    alert(fortune);
-}
+  function check_guess(){
 
+      if (isNaN(guess1)){
+          alert("What is the number? \n\n" +
+                  "Please put a number that is between 1 to 100.");
+          return false;
 
-tellFortune('Spain', 'Artist', 'Melissa', 3);
-tellFortune('Japan', 'Gamer', 'Leslie', 5);
-tellFortune('Brazil', 'Soccer player', 'Jennifer', 1);
-tellFortune('Australia', 'Hunter', 'Mary', 4);
+      }
+
+      if ((guess1 < 1) || (guess1 > 100)){
+          alert("Please enter a number that is only between 1 to 100");
+          return false;
+
+      }
+
+      if(guess1 > target){
+          alert ("The number you tried was below the number.");
+          return false;
+
+      }
+
+      if(guess1 < target){
+          alert("The number you guessed was above the number.");
+          return false;
+
+      }
+
+      alert("Correct, the mystery number was " + target );
+      return true;
+
+  }
+
+  game();
+
 </script>
-</body>
-</html>
